@@ -8,7 +8,7 @@ Structure:
 
 Client <--> Server <--> Database
 
-1. TLS encryption is implemented with self-signed certificates.
+1. TLS encryption is implemented with self-signed certificates
 2. A custom self-made protocol on top of TCP is used. It is stateful and it allows one tcp connection to multiplex many requests and match them with corresponding response. This allows for one connection to handle many requests before delivering a response.
 3. Hashing and salting is done with BCrypt.
 4. Database connections are reused (pooled) - this is done with the library commons-pool2-2.9.0
