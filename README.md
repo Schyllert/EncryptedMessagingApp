@@ -5,7 +5,7 @@ This was one of my early projects and it is not very well made - but it got me t
 
 The goal with the project was to have a secure way to authenticate users and enable them to message each other without exposing their IP to an other users. A subgoal was to implement a role system in which certain roles could use features based on their role.
 
-When i worked on this project I really struggled due to the fact that the connections were stateful - and this caused all kinds of different challenges. Going stateless and using the principles of REST and thus using http instead of a custom protocol would have made everything a lot easier and it is what I would have done today.
+When I worked on this project I really struggled due to the fact that the connections were stateful - and this caused all kinds of different challenges. Going stateless and using the principles of REST and thus using http instead of a custom protocol would have made everything a lot easier and it is what I would have done today.
 
 
 Structure
