@@ -1,0 +1,45 @@
+#!/bin/bash
+
+
+# Will create a new CA: CAcert.pem with private key: CAkey.pem
+
+# Only using one / causes a problem >
+# "This is because the underlying libraries (coming from mingw) are trying to be smart and convert arguments that look like paths to actual paths." - stackOverflow
+
+
+# -x509 this option outputs a self signed certificate instead of a certificate request.
+# Here we create our certificate authority
+
+winpty openssl req -x509 -newkey rsa:4096 -keyout CAkey.pem -out CAcert.pem -days 365 -CAcreateserial
+
+# This fucked it up
+#-subj "//C=//ST=//L=//O=//OU=//CN=CA" -passout pass:password
+
+# To display information about the certificate
+winpty openssl x509 -in CAcert.pem -noout -text
+
+#
+keytool -import -alias CA -file CAcert.pem -keystore "serverTrustStore"
+keytool -import -alias CA -file CAcert.pem -keystore "clientTrustStore"
+
+
+
+
+# Server-side
+
+keytool -genkeypair -alias chatserver -keyalg rsa -keystore serverkeystore
+
+
+keytool -certreq -alias chatserver -keystore serverkeystore -keyalg rsa -file server.csr
+
+winpty openssl x509 -req -days 365 -in server.csr -CA CAcert.pem -CAkey CAkey.pem -CAcreateserial -out "server-cert.pem"
+
+
+
+
+
+# Do not use the openssl ca command
+openssl x509 -req -in server-req.pem  CA ca-cert.pem -CAkey ca-key.pem -Cacreateserial -out server-cert.pem
+
+
+

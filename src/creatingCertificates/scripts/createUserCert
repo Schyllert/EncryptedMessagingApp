@@ -1,0 +1,44 @@
+#!/bin/bash
+
+echo Hi! Enter what username you want for your keystore:
+read -r username
+echo Enter a password you want for the keystore
+read -r password
+
+# Step 0 - having a CAcert.pem and CAkey.pem
+
+# Step 1 - Creating keystore
+# This will create a keystore with filename keystore_username, the password entered will be needed to access the keystore
+# The keystore contains a key pair, public/private key matching an alias: username
+keytool -alias "$username" -genkeypair -keyalg rsa -keystore "keystore_$username" -storepass "$password"
+
+
+if [ $? -eq 0 ]; then
+
+  # Step 2 - Creating a Certificate Signing Request (CSR) from the information stored under an alias in a given keystore
+	keytool -certreq -alias "$username" -keystore "keystore_$username" -keyalg rsa -file "${username}.csr"
+
+
+	if [ $? -eq 0 ]; then
+
+    # Step 3 - A server trusted CA authority is used to authenticate the CSR
+    # This is done by signing the request with the CA's private key (which is done by the owner of the CA)
+    # Everyone else can then decrypt the certificate by using the CA's public key
+    # If we trust the Certificate authority then we trust the signed certificate
+		winpty openssl x509 -req -days 365 -in ./"${username}.csr" -CA CAcert.pem -CAkey CAkey.pem -CAserial ./CAserial -CAcreateserial -out "${username}.pem"
+
+
+    # Import the certificate chain into your keystore. Note that you should import the CA certificate
+    # before you import the signed certificate.
+		keytool -import -trustcacerts -alias CA -file CAcert.pem -keystore "${username}"
+
+
+		keytool -import -alias "${username}" -file "${username}.pem" -keystore "${username}"
+
+
+	else
+   		 echo creating certificate signing request CSR failed
+	fi
+else
+    echo Creating initial genkeypair failed
+fi
