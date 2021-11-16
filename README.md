@@ -12,7 +12,7 @@ Structure
 Client <--> Server <--> Database
 
 1. TLS encryption is implemented with self-signed certificates
-2. A custom self-made protocol on top of TCP is used. It is stateful and it allows one tcp connection to multiplex many requests and match them with corresponding response. This allows for one connection to handle many requests before delivering a response (sounds a lot more fancy then what it actually is).
+2. A custom self-made protocol on top of TCP is used. It is stateful and it allows one tcp connection to multiplex many requests and match them with corresponding response. This allows for one connection to handle many requests before delivering a response (sounds a lot more fancy than what it actually is).
 3. Hashing and salting is done with BCrypt.
 4. Database connections are reused (pooled) - this is done with the library commons-pool2-2.9.0
 5. Authentication is implemented using username + hash(password+salt) - credentials stored in a MySQL database.
