@@ -29,7 +29,26 @@ Overview of AWS
 
 ![alt text](https://github.com/Schyllert/messagingApp/blob/master/AWS-infrastructure.png)
 
-Client login-page
+
+Protocol
+==
+Client <-> Server
+
+1. Both the server and client can initiate communication. 
+2. A message can either be a reply, or a call (call = request)
+    call replyNumber command parameters {data}
+    reply replyNumber response
+
+
+**Client commands:**
+
+    pm command:
+    call replyNumber pm receiver {message}
+
+    login command:
+    call replyNumber login username password
+
+ Client login-page
 ==
 
 ![alt text](https://github.com/Schyllert/messagingApp/blob/master/loginscreen.png)
