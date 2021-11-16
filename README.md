@@ -36,6 +36,9 @@ Client <-> Server
 
 1. Both the server and client can initiate communication. 
 2. A message can either be a reply, or a call (call = request)
+
+**Protocol Structure**
+
     call replyNumber command parameters {data}
     reply replyNumber response
 
