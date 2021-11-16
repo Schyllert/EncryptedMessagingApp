@@ -1,6 +1,6 @@
 # messagingApp
 
-This was one of my early projects and it is not very well made - but it got me thinking about a lot of different interesting topics. It is not done and I will not finish it, it needs to be reworked completely to be viable - and the development methodology previous used is also horrible. At the time I had only taken two basic courses in Java programming. 
+This was one of my early projects and it is not very well made - but it got me thinking about a lot of different interesting topics. It is not done and I will not finish it, it needs to be reworked completely to be viable - and the development methodology used is horrible. At the time I had only taken two basic courses in Java programming. 
 
 
 The goal with the project was to have a secure way to authenticate users and enable them to message each other without exposing their IP to an other users. A subgoal was to implement a role system in which certain roles could use features based on their role.
