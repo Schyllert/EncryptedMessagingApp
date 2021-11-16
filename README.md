@@ -1,8 +1,11 @@
 # messagingApp
 
-This was one of my early projects and it is not very well made - but it got me thinking about a lot of different interesting topics.
+This was one of my early projects and it is not very well made - but it got me thinking about a lot of different interesting topics. At the time I had only taken two basic courses in Java programming. 
+
 
 The goal with the project was to have a secure way to authenticate users and enable them to message each other without exposing their IP to an other users. A subgoal was to implement a role system in which certain roles could use features based on their role.
+
+When i worked on this project I really struggled due to the fact that the connections were stateful - and this caused all kinds of different challenges. 
 
 Structure
 ==
